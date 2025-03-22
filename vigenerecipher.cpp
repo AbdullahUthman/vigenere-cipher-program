@@ -2,22 +2,16 @@
 #include <string>
 using namespace std;
 
-void expandKey(string message, string &key) {
+void expandKey(string message, string &key) { //A function to expand the key so that its length matches the message length by appending its previous characters to itelf
     string expandedKey = "";
     for (int i = 0; i < message.length(); i++) {
-        if (isalpha(message[i])) {
             expandedKey += key[i % key.length()]; 
-        }
-        
-        else{
-            expandedKey += message[i];
-        }
     }
     key = expandedKey; 
 }
 
 
-bool validateKey(string message, string key){
+bool validateKey(string message, string key){ //A function to verify that each charecter of the key is an alphabet
     bool output = 1;
     
     for(int i=0; i<key.length(); i++){
@@ -38,7 +32,7 @@ string encrypt(string message, string key) {
 	}
 
 
-	int messageVal[message.length()];
+	int messageVal[message.length()];		//Arrays to store the ASCII values of the characters of the string message and key respectively
 	int keyVal[key.length()];
 
 	for(int i=0; i < key.length(); i++) {
@@ -89,7 +83,7 @@ string decrypt(string message, string key) {
 		expandKey(message,key);
 	}
 
-	int messageVal[message.length()];
+	int messageVal[message.length()];     //Arrays to store the ASCII values of the characters of the string message and key respectively
 	int keyVal[key.length()];
 
 	for(int i=0; i<key.length(); i++) {
@@ -174,7 +168,7 @@ int main() {
 			
 			ok = validateKey(encryptedMessage, key);
 			if(!ok){
-			    cout << "Error. Invalid Key!" << endl;
+			    cout << "Error. Invalid Key!" << endl;  //generates an error if the key contains non-alphabet characters
 			    choice = 'c';
 			}
 			
